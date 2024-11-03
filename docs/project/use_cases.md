@@ -296,6 +296,91 @@ stop;
 ```
 </center>
 <br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="UserLogIn"><code>UserLogIn</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Вхід користувача</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Користувач, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Користувач зареєстрований у системі</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Користувача успішно авторизовано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Користувач ввів неправильне ім'я користувача (InvalidUsernameException)</li>
+                <li>Користувач ввів неправильний пароль (InvalidPasswordException)</li>
+                <li>Користувач заблокований (UserBannedException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Користувач вводить ім'я користувача і пароль.</li>
+                <li>Користувач натискає на кнопку "Увійти".</li>
+                <li>Система перевіряє введені дані (можливе InvalidUsernameException або InvalidPasswordException).</li>
+                <li>Система перевіряє статус користувача (можливе UserBannedException).</li>
+                <li>Користувача успішно авторизують у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Користувач|
+start;
+: Вводить ім'я користувача і пароль;
+
+: Натискає на кнопку "Увійти";
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InvalidUsernameException
+<b> InvalidPasswordException
+end note
+
+: Перевіряє статус користувача;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> UserBannedException
+end note
+
+|Користувач|
+: Успішно авторизується у системі;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
 
 
 
