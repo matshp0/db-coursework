@@ -463,8 +463,170 @@ stop;
 
 @enduml
 ```
-</center> 
+</center>
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="EditTask"><code>EditTask</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Редагування задачі</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Користувач, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Користувач увійшов до системи і має доступ до задачі</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Задача успішно редагована</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Недостатні дані для редагування задачі (InsufficientDataException)</li>
+                <li>Задача не знайдена (TaskNotFoundException)</li>
+                <li>Недостатні права для редагування задачі (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Користувач вибирає задачу для редагування.</li>
+                <li>Користувач вносить зміни до задачі.</li>
+                <li>Користувач натискає на кнопку "Зберегти зміни".</li>
+                <li>Система перевіряє введені дані (можливе InsufficientDataException).</li>
+                <li>Система перевіряє, чи існує задача (можливе TaskNotFoundException).</li>
+                <li>Задача успішно редагована у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
 
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Користувач|
+start;
+: Вибирає задачу для редагування;
+
+: Вносить зміни до задачі;
+
+: Натискає на кнопку "Зберегти зміни";
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InsufficientDataException
+end note
+
+: Перевіряє, чи існує задача;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> TaskNotFoundException
+end note
+
+|Користувач|
+: Успішно редагує задачу;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="DeleteTask"><code>DeleteTask</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Видалення задачі</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Користувач, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Користувач увійшов до системи і має доступ до задачі</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Задача успішно видалена</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Задача не знайдена (TaskNotFoundException)</li>
+                <li>Недостатні права для видалення задачі (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Користувач вибирає задачу для видалення.</li>
+                <li>Користувач підтверджує видалення задачі.</li>
+                <li>Система перевіряє, чи існує задача (можливе TaskNotFoundException).</li>
+                <li>Задача успішно видалена з системи.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Користувач|
+start;
+: Вибирає задачу для видалення;
+
+: Підтверджує видалення задачі;
+
+|Система|
+: Перевіряє, чи існує задача;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> TaskNotFoundException
+end note
+
+|Користувач|
+: Успішно видаляє задачу;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
 
 
 
