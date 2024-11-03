@@ -789,6 +789,252 @@ stop;
 @enduml
 ```
 </center> 
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="CreateProject"><code>CreateProject</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Створення проекту</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Тімлід, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Тімлід увійшов до системи</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Проект успішно створено</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Недостатні дані для створення проекту (InsufficientDataException)</li>
+                <li>Проект з таким же ідентифікатором вже існує (ProjectAlreadyExistsException)</li>
+                <li>Недостатні права для створення проекту (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Тімлід заповнює форму створення проекту.</li>
+                <li>Тімлід натискає на кнопку "Створити проект".</li>
+                <li>Система перевіряє введені дані (можливе InsufficientDataException).</li>
+                <li>Система перевіряє, чи існує проект з таким же ідентифікатором (можливе ProjectAlreadyExistsException).</li>
+                <li>Проект успішно створено у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
 
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Тімлід|
+start;
+: Заповнює форму створення проекту;
+
+: Натискає на кнопку "Створити проект";
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InsufficientDataException
+end note
+
+: Перевіряє, чи існує проект з таким же ідентифікатором;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> ProjectAlreadyExistsException
+end note
+
+|Тімлід|
+: Успішно створює проект;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="EditProject"><code>EditProject</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Редагування проекту</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Тімлід, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Тімлід увійшов до системи і має доступ до проекту</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Проект успішно редаговано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Недостатні дані для редагування проекту (InsufficientDataException)</li>
+                <li>Проект не знайдено (ProjectNotFoundException)</li>
+                <li>Недостатні права для редагування проекту (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Тімлід вибирає проект для редагування.</li>
+                <li>Тімлід вносить зміни до проекту.</li>
+                <li>Тімлід натискає на кнопку "Зберегти зміни".</li>
+                <li>Система перевіряє введені дані (можливе InsufficientDataException).</li>
+                <li>Система перевіряє, чи існує проект (можливе ProjectNotFoundException).</li>
+                <li>Проект успішно редаговано у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Тімлід|
+start;
+: Вибирає проект для редагування;
+
+: Вносить зміни до проекту;
+
+: Натискає на кнопку "Зберегти зміни";
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InsufficientDataException
+end note
+
+: Перевіряє, чи існує проект;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> ProjectNotFoundException
+end note
+
+|Тімлід|
+: Успішно редагує проект;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="DeleteProject"><code>DeleteProject</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Видалення проекту</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Тімлід, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Тімлід увійшов до системи і має доступ до проекту</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Проект успішно видалено</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Проект не знайдено (ProjectNotFoundException)</li>
+                <li>Недостатні права для видалення проекту (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Тімлід вибирає проект для видалення.</li>
+                <li>Тімлід підтверджує видалення проекту.</li>
+                <li>Система перевіряє, чи існує проект (можливе ProjectNotFoundException).</li>
+                <li>Проект успішно видалено з системи.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Тімлід|
+start;
+: Вибирає проект для видалення;
+
+: Підтверджує видалення проекту;
+
+|Система|
+: Перевіряє, чи існує проект;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> ProjectNotFoundException
+end note
+
+|Тімлід|
+: Успішно видаляє проект;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
 
 
