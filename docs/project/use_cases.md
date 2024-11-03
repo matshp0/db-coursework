@@ -10,13 +10,13 @@ skinparam noteFontColor white
 actor "Робітник" as Collaborator
 
 
-usecase "<b>SignIn</b>\nЗареєструватися" as SignIn
+usecase "<b>SignUp</b>\nЗареєструватися" as SignUp
 usecase "<b>Login</b>\nВвхід у систему" as Login
 usecase "<b>ManageTasks</b>\nУправління завданнями" as ManageTasks
 usecase "<b>EditUser</b>\nРедагування даних користувача" as EditUser
 
 
-Collaborator -r-> SignIn
+Collaborator -r-> SignUp
 Collaborator -u-> Login
 Collaborator -l-> ManageTasks
 Collaborator -u-> EditUser
@@ -64,8 +64,8 @@ skinparam noteFontColor white
 
 actor "Робітник" as Collaborator
 
-usecase "<b>SignIn</b>\nРеєстрація" as SignIn
-usecase "<b>UserSignIn</b>\nРеєстрація користувача" as UserSignIn
+usecase "<b>SignUp</b>\nРеєстрація" as SignUp
+usecase "<b>UserSignUp</b>\nРеєстрація користувача" as UserSignUp
 usecase "<b>LogIn</b>\nВхід" as Login
 usecase "<b>UserLogIn</b>\nВхід користувача" as UserLogIn
 usecase "<b>EditUser</b>\nРедагувати дані користувача" as EditUser
@@ -76,8 +76,8 @@ usecase "<b>DeleteTask</b>\nВидалити завдання" as DeleteTask
 usecase "<b>FilterTask</b>\nВідфільтрувати завдання" as FilterTask
 usecase "<b>CommentTask</b>\nКоментувати завдання" as CommentTask
 
-Collaborator -l-> SignIn
-SignIn <.d. UserSignIn:extends
+Collaborator -l-> SignUp
+SignUp <.d. UserSignUp:extends
 Collaborator -r-> Login
 Login <.d. UserLogIn:extends
 Collaborator --d-> EditUser
