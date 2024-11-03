@@ -1,7 +1,7 @@
 # Розроблення функціональних вимог до системи
 
 
-## Загальна схема
+## Загальна схема1
 ```plantuml
 
 @startuml
@@ -58,7 +58,7 @@ Admin -u-|> Teamlead
 ```
 ## Робітник
 
-```
+```plantuml
 @startuml
 skinparam noteFontColor white
 
@@ -102,7 +102,7 @@ end note
 
 ```
 ## Тімлід
-```
+```plantuml
 @startuml
 top to bottom direction
 
@@ -121,7 +121,7 @@ Lead -u-> ProjectManage
 @enduml
 ```
 ## Адміністратор
-```
+```plantuml
 @startuml
 actor "Адміністратор системи" as Admin
 usecase "<b>DataManage</b>\nКерувати даними системи" as DataManage
@@ -135,5 +135,4 @@ UnBanUser .u.> DataManage:extends
 ```
 **Діаграма прецедентів**
 
-</center>
 
