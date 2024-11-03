@@ -381,6 +381,89 @@ stop;
 ```
 </center> 
 <br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="CreateTask"><code>CreateTask</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Створення задачі</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Користувач, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Користувач увійшов до системи</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Задача успішно створена</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Недостатні дані для створення задачі (InsufficientDataException)</li>
+                <li>Задача з таким же ідентифікатором вже існує (TaskAlreadyExistsException)</li>
+                <li>Недостатні права для створення задачі (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Користувач заповнює форму створення задачі.</li>
+                <li>Користувач натискає на кнопку "Створити задачу".</li>
+                <li>Система перевіряє введені дані (можливе InsufficientDataException).</li>
+                <li>Система перевіряє, чи існує задача з таким же ідентифікатором (можливе TaskAlreadyExistsException).</li>
+                <li>Задача успішно створена у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Користувач|
+start;
+: Заповнює форму створення задачі;
+
+: Натискає на кнопку "Створити задачу";
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InsufficientDataException
+end note
+
+: Перевіряє, чи існує задача з таким же ідентифікатором;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> TaskAlreadyExistsException
+end note
+
+|Користувач|
+: Успішно створює задачу;
+
+stop;
+
+@enduml
+```
+</center> 
 
 
 
