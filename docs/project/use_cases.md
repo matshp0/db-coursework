@@ -135,28 +135,82 @@ UnBanUser .u.> DataManage:extends
 ```
 ## Сценерії 
 
-<table> <tr> <th>ID</th> <th id="EditUser"><code>EditUser</code></th> </tr> <tr> <th>Назва</th> <td>Редагувати користувача</td> </tr> <tr> <th>Учасники</th> <td>Адміністратор, система</td> </tr> <tr> <th>Передумови</th> <td>Адміністратор ввійшов до системи</td> </tr> <tr> <th>Результат</th> <td>Користувача успішно відредаговано</td> </tr> <tr> <th>Виключні ситуації</th> <td> <ul> <li>Користувача не знайдено (UserNotFoundException)</li> <li>Недостатні права для редагування (InsufficientPermissionsException)</li> <li>Введені дані некоректні (InvalidDataException)</li> </ul> </td> </tr> <tr> <th>Основний сценарій</th> <td> <ol> <li>Адміністратор вибирає користувача для редагування.</li> <li>Адміністратор вносить зміни в дані користувача.</li> <li>Система перевіряє коректність введених даних (можливе InvalidDataException).</li> <li>Система зберігає зміни в даних користувача.</li> </ol> </td> </tr> </table> <center style=" border-radius:4px; border: 1px solid #cfd7e6; box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025); padding: 1em;">
-   
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="EditUser"><code>EditUser</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Редагувати користувача</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Адміністратор, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Адміністратор ввійшов до системи</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Користувача успішно відредаговано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Користувача не знайдено (UserNotFoundException)</li>
+                <li>Недостатні права для редагування (InsufficientPermissionsException)</li>
+                <li>Введені дані некоректні (InvalidDataException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Адміністратор вибирає користувача для редагування.</li>
+                <li>Адміністратор вносить зміни в дані користувача.</li>
+                <li>Система перевіряє коректність введених даних (можливе InvalidDataException).</li>
+                <li>Система зберігає зміни в даних користувача.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
 ```plantuml
 @startuml
 
-|Адміністратор| start; : Вибирає користувача для редагування;
+|Адміністратор|
+start;
+: Вибирає користувача для редагування;
 
 : Вносить зміни в дані користувача;
 
-|Система| : Перевіряє коректність введених даних;
+|Система|
+: Перевіряє коректність введених даних;
 
-note right #ffaaaa <b> Можливе виключення: <b> InvalidDataException end note
+note right #ffaaaa
+<b> Можливе виключення:
+<b> InvalidDataException
+end note
 
 : Зберігає зміни в даних користувача;
 
-|Адміністратор| : Успішно редагує користувача;
+|Адміністратор|
+: Успішно редагує користувача;
 
 stop;
 
 @enduml
 ```
-
 </center>
 
 
