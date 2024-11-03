@@ -1036,5 +1036,164 @@ stop;
 ```
 </center> 
 <br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="BanUser"><code>BanUser</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Блокування користувача</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Адміністратор, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Адміністратор увійшов до системи</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Користувача успішно заблоковано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Користувача не знайдено (UserNotFoundException)</li>
+                <li>Недостатні права для блокування користувача (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Адміністратор вибирає користувача для блокування.</li>
+                <li>Адміністратор підтверджує блокування користувача.</li>
+                <li>Система перевіряє, чи існує користувач (можливе UserNotFoundException).</li>
+                <li>Користувача успішно заблоковано у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Адміністратор|
+start;
+: Вибирає користувача для блокування;
+
+: Підтверджує блокування користувача;
+
+|Система|
+: Перевіряє, чи існує користувач;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> UserNotFoundException
+end note
+
+|Адміністратор|
+: Успішно блокує користувача;
+
+stop;
+
+@enduml
+```
+</center> 
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="UnbanUser"><code>UnbanUser</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Розблокування користувача</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Адміністратор, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Адміністратор увійшов до системи</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Користувача успішно розблоковано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Користувача не знайдено (UserNotFoundException)</li>
+                <li>Користувач не заблокований (UserNotBannedException)</li>
+                <li>Недостатні права для розблокування користувача (InsufficientPermissionsException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Адміністратор вибирає користувача для розблокування.</li>
+                <li>Адміністратор підтверджує розблокування користувача.</li>
+                <li>Система перевіряє, чи існує користувач (можливе UserNotFoundException).</li>
+                <li>Система перевіряє, чи користувач заблокований (можливе UserNotBannedException).</li>
+                <li>Користувача успішно розблоковано у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Адміністратор|
+start;
+: Вибирає користувача для розблокування;
+
+: Підтверджує розблокування користувача;
+
+|Система|
+: Перевіряє, чи існує користувач;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> UserNotFoundException
+end note
+
+: Перевіряє, чи користувач заблокований;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> UserNotBannedException
+end note
+
+|Адміністратор|
+: Успішно розблоковує користувача;
+
+stop;
+
+@enduml
+```
+</center> 
+
 
 
