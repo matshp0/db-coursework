@@ -53,9 +53,10 @@ Admin --> DataManage
 
 Admin -u-|> Teamlead
 @enduml
-**Діаграма прецедентів**
 
 ```
+**Діаграма прецедентів**
+
 ## Робітник
 
 ```plantuml
