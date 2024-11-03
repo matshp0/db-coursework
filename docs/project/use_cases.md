@@ -146,11 +146,11 @@ UnBanUser .u.> DataManage:extends
     </tr>
     <tr>
         <th>Учасники</th>
-        <td>Адміністратор, система</td>
+        <td>Користувач, адміністратор,система</td>
     </tr>
     <tr>
         <th>Передумови</th>
-        <td>Адміністратор ввійшов до системи</td>
+        <td>Користувач ввійшов до системи</td>
     </tr>
     <tr>
         <th>Результат</th>
@@ -170,8 +170,7 @@ UnBanUser .u.> DataManage:extends
         <th>Основний сценарій</th>
         <td>
             <ol>
-                <li>Адміністратор вибирає користувача для редагування.</li>
-                <li>Адміністратор вносить зміни в дані користувача.</li>
+                <li>Користувач вносить зміни в дані.</li>
                 <li>Система перевіряє коректність введених даних (можливе InvalidDataException).</li>
                 <li>Система зберігає зміни в даних користувача.</li>
             </ol>
@@ -188,11 +187,11 @@ UnBanUser .u.> DataManage:extends
 ```plantuml
 @startuml
 
-|Адміністратор|
+|Користувач|
 start;
-: Вибирає користувача для редагування;
+: Натискає на кнопку "Редагувати";
 
-: Вносить зміни в дані користувача;
+: Вносить зміни в дані;
 
 |Система|
 : Перевіряє коректність введених даних;
@@ -204,14 +203,95 @@ end note
 
 : Зберігає зміни в даних користувача;
 
-|Адміністратор|
-: Успішно редагує користувача;
+|Користувач|
+: Успішно редагує дані;
 
 stop;
 
 @enduml
 ```
 </center>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th id="UserSignUp"><code>UserSignUp</code></th>
+    </tr>
+    <tr>
+        <th>Назва</th>
+        <td>Реєстрація користувача</td>
+    </tr>
+    <tr>
+        <th>Учасники</th>
+        <td>Користувач, система</td>
+    </tr>
+    <tr>
+        <th>Передумови</th>
+        <td>Користувач не зареєстрований у системі</td>
+    </tr>
+    <tr>
+        <th>Результат</th>
+        <td>Користувача успішно зареєстровано</td>
+    </tr>
+    <tr>
+        <th>Виключні ситуації</th>
+        <td>
+            <ul>
+                <li>Користувач вже існує (UserAlreadyExistsException)</li>
+                <li>Недостатні дані (InsufficientDataException)</li>
+                <li>Введені дані некоректні (InvalidDataException)</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Основний сценарій</th>
+        <td>
+            <ol>
+                <li>Користувач заповнює форму реєстрації.</li>
+                <li>Система перевіряє введені дані (можливе InvalidDataException або InsufficientDataException).</li>
+                <li>Система перевіряє, чи користувач вже існує (можливе UserAlreadyExistsException).</li>
+                <li>Користувача успішно реєструють у системі.</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;">
+
+```plantuml
+@startuml
+
+|Користувач|
+start;
+: Заповнює форму реєстрації;
+
+|Система|
+: Перевіряє введені дані;
+
+note right #ffaaaa
+<b> Можливі виключення:
+<b> InvalidDataException
+<b> InsufficientDataException
+end note
+
+: Перевіряє, чи користувач вже існує;
+
+note right #ffaaaa
+<b> Можливе виключення:
+<b> UserAlreadyExistsException
+end note
+
+|Користувач|
+: Успішно реєструється у системі;
+
+stop;
+```
+
+@enduml
 
 
 
