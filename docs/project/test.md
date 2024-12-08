@@ -2,6 +2,10 @@
 
 Тестування відбувається за допомогою сервісу POSTMAN.
 
+## Запуск сервера
+
+<img src="./images/11.png">
+
 ## GET /project
 
 <img src="./images/1.png">
