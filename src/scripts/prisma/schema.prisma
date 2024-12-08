@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model artefact {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  title       String   @db.VarChar(100)
+  description String?  @db.Text
+  filePath    String   @db.VarChar(255)
+  fileType    String   @db.VarChar(45)
+  uploadedBy  Int      @db.UnsignedInt
+  projectId   Int      @db.UnsignedInt
+  createdAt   DateTime @default(now()) @db.DateTime(0)
+  project     project  @relation(fields: [projectId], references: [id], onDelete: Cascade, map: "fk_projectId_artefact")
+  user        user     @relation(fields: [uploadedBy], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_uploadedBy_user")
+
+  @@index([uploadedBy], map: "fk_uploadedBy_user")
+  @@index([projectId], map: "projectId_idx")
+}
+
+model grant {
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
+  projectId Int      @db.UnsignedInt
+  userId    Int      @db.UnsignedInt
+  createdAt DateTime @default(now()) @db.DateTime(0)
+  project   project  @relation(fields: [projectId], references: [id], onDelete: Cascade, map: "fk_grant_project")
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_grant_user")
+
+  @@index([projectId], map: "projectId_idx")
+  @@index([userId], map: "userId_idx")
+}
+
+model member {
+  id       Int             @id @default(autoincrement()) @db.UnsignedInt
+  userId   Int             @db.UnsignedInt
+  teamId   Int             @db.UnsignedInt
+  teamRole member_teamRole @default(Developer)
+  joinedAt DateTime        @default(now()) @db.DateTime(0)
+  team     team            @relation(fields: [teamId], references: [id], onDelete: Cascade, map: "fk_member_teamId")
+  user     user            @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_userId")
+
+  @@index([teamId], map: "teamId_idx")
+  @@index([userId], map: "userId_idx")
+}
+
+model project {
+  id          Int        @id @default(autoincrement()) @db.UnsignedInt
+  name        String     @unique(map: "name_UNIQUE") @db.VarChar(100)
+  description String?    @db.Text
+  ownerId     Int        @db.UnsignedInt
+  teamId      Int        @db.UnsignedInt
+  createdAt   DateTime   @default(now()) @db.DateTime(0)
+  artefact    artefact[]
+  grant       grant[]
+  user        user       @relation(fields: [ownerId], references: [id], onDelete: NoAction, map: "fk_ownerId")
+  team        team       @relation(fields: [teamId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_teamId")
+  task        task[]
+
+  @@index([teamId], map: "fk_teamId")
+  @@index([ownerId], map: "ownerId_idx")
+}
+
+model role {
+  id   Int    @id @unique(map: "idRole_UNIQUE") @default(autoincrement()) @db.UnsignedInt
+  name String @unique(map: "name_UNIQUE") @db.VarChar(45)
+  user user[]
+}
+
+model task {
+  id          Int           @id @default(autoincrement()) @db.UnsignedInt
+  title       String        @db.VarChar(100)
+  description String?       @db.Text
+  assignedTo  Int?          @db.UnsignedInt
+  projectId   Int           @db.UnsignedInt
+  status      task_status   @default(PENDING)
+  priority    task_priority @default(MEDIUM)
+  dueDate     DateTime?     @db.DateTime(0)
+  createdAt   DateTime      @default(now()) @db.DateTime(0)
+  user        user?         @relation(fields: [assignedTo], references: [id], map: "fk_assignedTo_user")
+  project     project       @relation(fields: [projectId], references: [id], onDelete: Cascade, map: "fk_projectId")
+
+  @@index([assignedTo], map: "assignedTo_idx")
+  @@index([projectId], map: "projectId_idx")
+}
+
+model team {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  createdAt DateTime  @default(now()) @db.DateTime(0)
+  member    member[]
+  project   project[]
+}
+
+model user {
+  id        Int         @id @default(autoincrement()) @db.UnsignedInt
+  username  String      @db.VarChar(45)
+  email     String      @unique(map: "email_UNIQUE") @db.VarChar(45)
+  password  String      @db.VarChar(255)
+  roleId    Int         @db.UnsignedInt
+  status    user_status @default(ACTIVE)
+  createdAt DateTime    @default(now()) @db.DateTime(0)
+  artefact  artefact[]
+  grant     grant[]
+  member    member[]
+  project   project[]
+  task      task[]
+  role      role        @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_roleId")
+
+  @@index([roleId], map: "roleId_idx")
+}
+
+enum member_teamRole {
+  Developer
+  Project_Leader @map("Project Leader")
+}
+
+enum user_status {
+  ACTIVE
+  BANNED
+}
+
+enum task_status {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum task_priority {
+  LOW
+  MEDIUM
+  HIGH
+}
